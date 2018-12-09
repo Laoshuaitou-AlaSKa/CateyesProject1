@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhbit210.model.dao.OrdersMapper">
+    <resultMap id="OrderMap" type="com.zhbit210.model.pojo.Orders">
+        <id column="id" property="id"/>
+        <result column="movieId" property="movieId"/>
+        <result column="userId" property="userId"/>
+        <result column="line" property="line"/>
+        <result column="row" property="row"/>
+        <result column="price" property="price"/>
+        <result column="status" property="status"/>
+    </resultMap>
+    <resultMap id="SeatMap" type="com.zhbit210.model.pojo.Seat">
+        <result column="line" property="line"/>
+        <result column="row" property="row"/>
+    </resultMap>
+    <insert id="createOrder" parameterType="com.zhbit210.model.pojo.Orders">
+        INSERT INTO orders(orders.movieId,orders.userId,orders.line,orders.rows,orders.price,orders.status)
+            VALUES (#{movieId},#{userId},#{line},#{row},#{price},#{status})
+    </insert>
+    <delete id="deleteOrder" parameterType="int">
+        DELETE FROM `orders` WHERE id=#{orderId}
+    </delete>
+    <select id="selectOrderById" resultType="com.zhbit210.model.pojo.Orders" parameterType="int">
+        SELECT * FROM `orders`WHERE movieId=#{movieId} AND userId=#{userId}
+    </select>
+    <select id="selectAllOrder" resultType="com.zhbit210.model.pojo.Orders">
+        SELECT * FROM `orders`
+    </select>
+    <select id="selectOrderByUserId" resultType="com.zhbit210.model.pojo.Orders" parameterType="int">
+        SELECT * FROM `orders`WHERE userId=#{userId}
+    </select>
+    <select id="selectSeats" resultType="com.zhbit210.model.pojo.Seat" parameterType="int">
+        SELECT (line,row) FROM `orders` WHERE movieId=#{movieId}
+    </select>
+
+</mapper>

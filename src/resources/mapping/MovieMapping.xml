@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhbit210.model.dao.MovieMapper">
+    <resultMap id="MovieMap" type="com.zhbit210.model.pojo.Movie">
+        <id column="id" property="id"/>
+        <result column="movieName" property="movieName"/>
+        <result column="hallId" property="hallId"/>
+        <result column="movieTime" property="movieTime"/>
+        <result column="movieMessage" property="movieMessage"/>
+        <result column="moviePrice" property="moviePrice"/>
+    </resultMap>
+    <select id="selectMovieById" resultType="com.zhbit210.model.pojo.Movie" parameterType="int">
+        SELECT * FROM movie WHERE id=#{movieId}
+    </select>
+    <select id="selectAllMovie" resultType="com.zhbit210.model.pojo.Movie">
+        SELECT * FROM movie
+    </select>
+    <select id="selectMovieByHallId" resultType="com.zhbit210.model.pojo.Movie" parameterType="int">
+        SELECT * FROM movie WHERE hallId=#{hallId}
+    </select>
+    <select id="selectMovieByMovieName" resultType="com.zhbit210.model.pojo.Movie" parameterType="String">
+        SELECT * FROM movie WHERE movieName=#{movieName}
+    </select>
+    <select id="selectIntroByMoviename" resultType="java.lang.String" parameterType="String">
+        SELECT movieMessage FROM movie WHERE movieName=#{movieName} LIMIT 1
+    </select>
+
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhbit210.model.dao.UserMessageMapper">
+    <resultMap id="UserMessageMap" type="com.zhbit210.model.pojo.UserMessage">
+        <id column="id" property="id"/>
+        <result column="userId" property="userid"/>
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+        <result column="sex" property="sex"/>
+        <result column="phonenum" property="phonenum"/>
+    </resultMap>
+    <insert id="createUserMessage" parameterType="com.zhbit210.model.pojo.UserMessage">
+        INSERT INTO usermessage(userid, name, age, sex, phonenum) VALUES (#{userid},#{name},#{age},#{sex},#{phonenum})
+    </insert>
+    <update id="updateUserMessage" parameterType="com.zhbit210.model.pojo.UserMessage">
+        UPDATE usermessage SET name=#{name},age=#{age},sex=#{sex},phonenum=#{phonenum}
+        WHERE userId=#{userid}
+    </update>
+    <select id="selectUserMessageByUserId" resultType="com.zhbit210.model.pojo.UserMessage" parameterType="int">
+        SELECT * FROM usermessage WHERE userid=#{userId}
+    </select>
+    <select id="selectAllUserMessage" resultType="com.zhbit210.model.pojo.UserMessage">
+        SELECT * FROM usermessage
+    </select>
+
+</mapper>
